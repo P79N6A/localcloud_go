@@ -1,2 +1,2 @@
 # localcloud-go
-本地云Golang版本后端 gin试水
+《分布式对象存储》练习
