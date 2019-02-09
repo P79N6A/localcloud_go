@@ -78,7 +78,7 @@ func PutMetadata(name string, version int, size int64, hash string) error {
 	url := fmt.Sprintf("http://%s/metadata/objects/%s_%d?op_type=create",
 		os.Getenv("ES_SERVER"), name, version)
 	request, _ := http.NewRequest("PUT", url, strings.NewReader(doc))
-	request.Header.Set("Content-Type", "application/json;charset=UTF-8")
+	request.Header.Add("Content-Type", "application/json;charset=UTF-8")
 	r, e := client.Do(request)
 	if e != nil {
 		return e
@@ -126,7 +126,7 @@ func DelMetadata(name string, version int) {
 	url := fmt.Sprintf("http://%s/metadata/objects/%s_%d",
 		os.Getenv("ES_SERVER"), name, version)
 	request, _ := http.NewRequest("DELETE", url, nil)
-	request.Header.Set("Content-Type", "application/json;charset=UTF-8")
+	request.Header.Add("Content-Type", "application/json;charset=UTF-8")
 	client.Do(request)
 }
 
@@ -169,7 +169,7 @@ func SearchVersionStatus(min_doc_count int) ([]Bucket, error) {
           }
         }`, min_doc_count)
 	request, _ := http.NewRequest("GET", url, strings.NewReader(body))
-	request.Header.Set("Content-Type", "application/json;charset=UTF-8")
+	request.Header.Add("Content-Type", "application/json;charset=UTF-8")
 	r, e := client.Do(request)
 	if e != nil {
 		return nil, e
